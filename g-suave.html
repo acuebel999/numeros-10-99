@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La G Suave — 2º Primaria</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g-color: #f97316;
+  --ga-color: #22c55e;
+  --go-color: #3b82f6;
+  --gu-color: #a855f7;
+  --gue-color: #ec4899;
+  --gui-color: #f59e0b;
+  --bg: #fdfaf5;
+  --card: #ffffff;
+  --text: #1e1b18;
+  --shadow: 0 8px 30px rgba(0,0,0,0.10);
+  --radius: 24px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── BACKGROUND PATTERN ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 15%, #fde68a44 0%, transparent 35%),
+    radial-gradient(circle at 85% 20%, #bbf7d044 0%, transparent 35%),
+    radial-gradient(circle at 50% 85%, #fce7f344 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, #ddd6fe44 0%, transparent 30%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HEADER ── */
+header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 30px 20px 10px;
+}
+.logo-g {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(3.5rem, 12vw, 6rem);
+  font-weight: 800;
+  color: var(--g-color);
+  display: inline-block;
+  text-shadow: 4px 4px 0 #fed7aa, 6px 6px 0 #fbbf24;
+  animation: float 3s ease-in-out infinite;
+  line-height: 1;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+header h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #444;
+  margin-top: 4px;
+}
+header p {
+  color: #777;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* ── NAV TABS ── */
+.tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+.tab-btn {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 10px 28px;
+  border: 3px solid transparent;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.22s;
+  background: white;
+  color: #666;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.tab-btn.active-learn {
+  background: linear-gradient(135deg, #fde68a, #fbbf24);
+  color: #7c2d12;
+  border-color: #f59e0b;
+  box-shadow: 0 6px 18px rgba(245,158,11,0.35);
+}
+.tab-btn.active-play {
+  background: linear-gradient(135deg, #86efac, #22c55e);
+  color: #14532d;
+  border-color: #16a34a;
+  box-shadow: 0 6px 18px rgba(34,197,94,0.35);
+}
+.tab-btn:hover:not(.active-learn):not(.active-play) {
+  transform: translateY(-2px);
+  border-color: #ddd;
+}
+
+/* ── PAGES ── */
+.page { display: none; position: relative; z-index: 1; }
+.page.active { display: block; animation: fadeUp 0.4s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ════════════════════════════════
+   LEARN PAGE
+════════════════════════════════ */
+.learn-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+.rule-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow);
+  border-left: 8px solid var(--ga-color);
+  position: relative;
+  overflow: hidden;
+}
+.rule-card.rule-gue { border-left-color: var(--gue-color); }
+
+.rule-card::after {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.04;
+}
+
+.rule-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rule-card .rule-title { color: var(--ga-color); }
+.rule-card.rule-gue .rule-title { color: var(--gue-color); }
+
+.rule-explain {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.rule-explain strong { color: #222; }
+
+/* Syllable pills */
+.syllable-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.syl-pill {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.5rem;
+  font-weight: 800;
+  padding: 6px 22px;
+  border-radius: 50px;
+  color: white;
+  animation: pop-in 0.4s ease backwards;
+}
+@keyframes pop-in {
+  from { transform: scale(0.5); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.pill-ga { background: var(--ga-color); animation-delay: 0.05s; }
+.pill-go { background: var(--go-color); animation-delay: 0.10s; }
+.pill-gu { background: var(--gu-color); animation-delay: 0.15s; }
+.pill-gue { background: var(--gue-color); animation-delay: 0.05s; }
+.pill-gui { background: var(--gui-color); animation-delay: 0.10s; }
+
+/* Example word cards */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+}
+.ex-card {
+  background: #fafafa;
+  border-radius: 16px;
+  padding: 14px 10px;
+  text-align: center;
+  border: 2px solid #eee;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.ex-card:hover { transform: translateY(-4px); box-shadow: 0 6px 16px rgba(0,0,0,0.10); }
+.ex-card svg { display: block; margin: 0 auto 8px; }
+.ex-word {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+}
+.ex-syl {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 2px;
+}
+.speak-badge {
+  font-size: 0.7rem;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+/* Trick box for GUE/GUI */
+.trick-box {
+  background: linear-gradient(135deg, #fff0f9, #fce7f3);
+  border: 2px dashed var(--gue-color);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-top: 16px;
+}
+.trick-box p {
+  font-size: 0.95rem;
+  color: #9d174d;
+  line-height: 1.6;
+}
+.trick-box strong { color: #be185d; }
+
+/* DIERESIS demo */
+.dieresis-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+.dier-word {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 6px 16px;
+  border-radius: 12px;
+  background: #fdf4ff;
+  color: var(--gu-color);
+  border: 2px solid #e9d5ff;
+}
+
+/* ════════════════════════════════
+   PLAY PAGE
+════════════════════════════════ */
+.play-page {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+/* score bar */
+.score-bar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.score-pill {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 6px 20px;
+  border-radius: 50px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+.score-pill.ok { color: #16a34a; }
+.score-pill.ko { color: #dc2626; }
+
+/* Question card */
+.question-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.q-label {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 10px;
+}
+.q-rule-badge {
+  display: inline-block;
+  font-family: 'Baloo 2', cursive;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 20px;
+  color: white;
+  margin-bottom: 14px;
+}
+.svg-wrapper {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 16px;
+  border-radius: 20px;
+  background: #fafafa;
+  border: 3px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.listen-btn {
+  background: linear-gradient(135deg, #38bdf8, #0284c7);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 28px;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+  box-shadow: 0 4px 12px rgba(2,132,199,0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.listen-btn:hover { transform: scale(1.05); }
+
+/* Options */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.opt-btn {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding: 18px 12px;
+  border: 3px solid #e5e7eb;
+  border-radius: 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.18s;
+  color: #333;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--g-color);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(249,115,22,0.2);
+}
+.opt-btn.correct {
+  background: #f0fdf4;
+  border-color: #22c55e;
+  color: #166534;
+  animation: pop-ans 0.35s ease;
+}
+.opt-btn.wrong {
+  background: #fff1f2;
+  border-color: #f87171;
+  color: #991b1b;
+  animation: shake-ans 0.4s ease;
+}
+@keyframes pop-ans {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+@keyframes shake-ans {
+  0%,100% { transform: translateX(0); }
+  25%     { transform: translateX(-7px); }
+  75%     { transform: translateX(7px); }
+}
+
+/* Feedback */
+.feedback-area {
+  min-height: 54px;
+  text-align: center;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #22c55e;
+  margin-bottom: 8px;
+}
+.feedback-area.ko { color: #ef4444; }
+
+/* Next btn */
+.next-btn {
+  display: block;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #fde68a, #f59e0b);
+  color: #7c2d12;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 48px;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(245,158,11,0.4);
+  transition: all 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+.next-btn.visible { opacity: 1; pointer-events: all; animation: pop-in 0.4s ease; }
+.next-btn:hover { transform: scale(1.05); }
+
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+  background: #e5e7eb;
+  border-radius: 10px;
+  height: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-g">G</div>
+  <h1>La G suave 🐊</h1>
+  <p>2.º de Primaria · ¡Aprende y juega!</p>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab-btn active-learn" id="tabLearn" onclick="showPage('learn')">📖 Aprende</button>
+  <button class="tab-btn" id="tabPlay" onclick="showPage('play')">🎮 ¡A jugar!</button>
+</div>
+
+<!-- ══════════════ LEARN PAGE ══════════════ -->
+<div class="page active learn-page" id="pageLearn">
+
+  <!-- RULE 1: GA GO GU -->
+  <div class="rule-card">
+    <div class="rule-title">📌 Regla 1 · GA · GO · GU</div>
+    <p class="rule-explain">
+      La <strong>G suena suave</strong> (como en <em>gato</em>) cuando va seguida de
+      <strong>A</strong>, <strong>O</strong> o <strong>U</strong>.
+    </p>
+    <div class="syllable-row">
+      <span class="syl-pill pill-ga">GA</span>
+      <span class="syl-pill pill-go">GO</span>
+      <span class="syl-pill pill-gu">GU</span>
+    </div>
+    <div class="examples-grid" id="exGrid1"></div>
+  </div>
+
+  <!-- RULE 2: GUE GUI -->
+  <div class="rule-card rule-gue">
+    <div class="rule-title">📌 Regla 2 · GUE · GUI</div>
+    <p class="rule-explain">
+      Antes de <strong>E</strong> o <strong>I</strong>, la G sonaría fuerte (como en <em>gente</em>).
+      Para que siga sonando <strong>suave</strong>, añadimos una <strong>U</strong> silenciosa:
+    </p>
+    <div class="syllable-row">
+      <span class="syl-pill pill-gue">GUE</span>
+      <span class="syl-pill pill-gui">GUI</span>
+    </div>
+    <p class="rule-explain" style="margin-bottom:14px;">
+      La U <strong>no se pronuncia</strong> — sólo está ahí para "proteger" el sonido suave de la G.
+    </p>
+    <div class="examples-grid" id="exGrid2"></div>
+
+    <div class="trick-box">
+      <p>💡 <strong>Truco para recordarlo:</strong><br>
+      Imagina que la <strong>U</strong> es un escudo 🛡️ que protege a la <strong>G</strong>
+      para que no cambie de sonido cuando llegan la <strong>E</strong> o la <strong>I</strong>.</p>
+
+      <div class="dieresis-demo">
+        <span style="font-size:0.9rem; color:#9d174d; font-weight:600;">¿Y si sí quiero oír la U?</span>
+        <span class="dier-word">cigüeña</span>
+        <span class="dier-word">pingüino</span>
+        <span style="font-size:0.85rem; color:#9d174d;">← ¡Dos puntitos = U suena!</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /learn -->
+
+<!-- ══════════════ PLAY PAGE ══════════════ -->
+<div class="page play-page" id="pagePlay">
+  <div class="score-bar">
+    <span class="score-pill ok">✅ <span id="scoreOk">0</span></span>
+    <span class="score-pill ko">❌ <span id="scoreKo">0</span></span>
+    <span class="score-pill" style="color:#666">🎯 <span id="scoreTotal">0</span> jugadas</span>
+  </div>
+  <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+  <div class="question-card">
+    <p class="q-label">¿Cómo se escribe esta palabra?</p>
+    <div class="q-rule-badge" id="qRuleBadge">GA/GO/GU</div>
+    <div class="svg-wrapper" id="svgWrapper"></div>
+    <button class="listen-btn" id="listenBtn" onclick="listenWord()">🔊 Escuchar</button>
+  </div>
+
+  <div class="options-grid" id="optionsGrid"></div>
+  <div class="feedback-area" id="feedbackArea"></div>
+  <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Siguiente →</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SVG ILLUSTRATIONS
+════════════════════════════════════════ -->
+<script>
+/* ── SVG LIBRARY ── */
+const SVGS = {
+
+  gato: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- body -->
+    <ellipse cx="100" cy="130" rx="55" ry="45" fill="#f5c842"/>
+    <!-- head -->
+    <circle cx="100" cy="80" r="38" fill="#f5c842"/>
+    <!-- ears -->
+    <polygon points="68,52 58,22 82,42" fill="#f5c842"/>
+    <polygon points="132,52 142,22 118,42" fill="#f5c842"/>
+    <polygon points="70,50 63,30 80,43" fill="#f4a0a0"/>
+    <polygon points="130,50 137,30 120,43" fill="#f4a0a0"/>
+    <!-- eyes -->
+    <ellipse cx="87" cy="76" rx="7" ry="8" fill="#1e1b18"/>
+    <ellipse cx="113" cy="76" rx="7" ry="8" fill="#1e1b18"/>
+    <circle cx="89" cy="74" r="2" fill="white"/>
+    <circle cx="115" cy="74" r="2" fill="white"/>
+    <!-- nose -->
+    <ellipse cx="100" cy="88" rx="5" ry="3.5" fill="#f47"/>
+    <!-- mouth -->
+    <path d="M94,92 Q100,98 106,92" stroke="#333" stroke-width="2" fill="none"/>
+    <!-- whiskers -->
+    <line x1="60" y1="86" x2="88" y2="89" stroke="#888" stroke-width="1.5"/>
+    <line x1="60" y1="92" x2="88" y2="91" stroke="#888" stroke-width="1.5"/>
+    <line x1="112" y1="89" x2="140" y2="86" stroke="#888" stroke-width="1.5"/>
+    <line x1="112" y1="91" x2="140" y2="92" stroke="#888" stroke-width="1.5"/>
+    <!-- tail -->
+    <path d="M155,140 Q180,110 170,85" stroke="#f5c842" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- legs -->
+    <ellipse cx="78" cy="168" rx="16" ry="10" fill="#f5c842"/>
+    <ellipse cx="122" cy="168" rx="16" ry="10" fill="#f5c842"/>
+  </svg>`,
+
+  goma: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- eraser body -->
+    <rect x="30" y="70" width="140" height="80" rx="14" fill="#f472b6"/>
+    <!-- stripe -->
+    <rect x="30" y="70" width="40" height="80" rx="0" fill="#e11d48"/>
+    <rect x="30" y="70" width="40" height="80" rx="14" fill="#e11d48"/>
+    <rect x="55" y="70" width="20" height="80" fill="#e11d48"/>
+    <!-- rubber top highlight -->
+    <rect x="35" y="76" width="130" height="14" rx="7" fill="white" opacity="0.25"/>
+    <!-- label -->
+    <text x="90" y="118" text-anchor="middle" font-family="Baloo 2,sans-serif" font-size="18" font-weight="800" fill="white">GOMA</text>
+    <!-- erased marks -->
+    <line x1="40" y1="55" x2="90" y2="65" stroke="#ccc" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="100" y2="63" stroke="#ccc" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+
+  gusano: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- body segments -->
+    <circle cx="40" cy="130" r="22" fill="#a3e635"/>
+    <circle cx="75" cy="120" r="22" fill="#84cc16"/>
+    <circle cx="110" cy="115" r="22" fill="#a3e635"/>
+    <circle cx="145" cy="120" r="22" fill="#84cc16"/>
+    <!-- head -->
+    <circle cx="168" cy="105" r="26" fill="#65a30d"/>
+    <!-- eyes -->
+    <circle cx="162" cy="98" r="6" fill="white"/>
+    <circle cx="176" cy="98" r="6" fill="white"/>
+    <circle cx="163" cy="99" r="3" fill="#1e1b18"/>
+    <circle cx="177" cy="99" r="3" fill="#1e1b18"/>
+    <!-- smile -->
+    <path d="M157,110 Q168,120 179,110" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- antennae -->
+    <line x1="162" y1="80" x2="155" y2="62" stroke="#65a30d" stroke-width="3"/>
+    <circle cx="155" cy="60" r="5" fill="#f472b6"/>
+    <line x1="176" y1="80" x2="183" y2="62" stroke="#65a30d" stroke-width="3"/>
+    <circle cx="183" cy="60" r="5" fill="#f472b6"/>
+    <!-- ground -->
+    <rect x="0" y="155" width="200" height="12" rx="6" fill="#d97706" opacity="0.3"/>
+  </svg>`,
+
+  gorila: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- body -->
+    <ellipse cx="100" cy="145" rx="50" ry="42" fill="#44403c"/>
+    <!-- head -->
+    <ellipse cx="100" cy="82" rx="40" ry="36" fill="#44403c"/>
+    <!-- face plate -->
+    <ellipse cx="100" cy="90" rx="26" ry="22" fill="#78716c"/>
+    <!-- brow ridge -->
+    <rect x="65" y="66" width="70" height="14" rx="7" fill="#292524"/>
+    <!-- eyes -->
+    <circle cx="88" cy="78" r="7" fill="#1e1b18"/>
+    <circle cx="112" cy="78" r="7" fill="#1e1b18"/>
+    <circle cx="90" cy="76" r="2.5" fill="white"/>
+    <circle cx="114" cy="76" r="2.5" fill="white"/>
+    <!-- nose -->
+    <ellipse cx="100" cy="92" rx="9" ry="6" fill="#57534e"/>
+    <circle cx="96" cy="91" r="3" fill="#292524"/>
+    <circle cx="104" cy="91" r="3" fill="#292524"/>
+    <!-- mouth -->
+    <path d="M88,102 Q100,112 112,102" stroke="#292524" stroke-width="2.5" fill="none"/>
+    <!-- ears -->
+    <ellipse cx="62" cy="82" rx="10" ry="12" fill="#44403c"/>
+    <ellipse cx="138" cy="82" rx="10" ry="12" fill="#44403c"/>
+    <!-- arms -->
+    <ellipse cx="55" cy="150" rx="18" ry="10" fill="#44403c" transform="rotate(-20,55,150)"/>
+    <ellipse cx="145" cy="150" rx="18" ry="10" fill="#44403c" transform="rotate(20,145,150)"/>
+    <!-- legs -->
+    <ellipse cx="82" cy="178" rx="18" ry="12" fill="#44403c"/>
+    <ellipse cx="118" cy="178" rx="18" ry="12" fill="#44403c"/>
+  </svg>`,
+
+  gallina: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- body -->
+    <ellipse cx="105" cy="135" rx="52" ry="42" fill="#fef3c7"/>
+    <!-- wing -->
+    <ellipse cx="92" cy="138" rx="35" ry="24" fill="#fde68a" transform="rotate(-10,92,138)"/>
+    <!-- head -->
+    <circle cx="150" cy="85" r="28" fill="#fef3c7"/>
+    <!-- comb -->
+    <ellipse cx="148" cy="60" rx="8" ry="12" fill="#ef4444"/>
+    <ellipse cx="158" cy="58" rx="7" ry="11" fill="#ef4444"/>
+    <ellipse cx="138" cy="62" rx="7" ry="10" fill="#ef4444"/>
+    <!-- wattle -->
+    <ellipse cx="148" cy="100" rx="7" ry="10" fill="#ef4444"/>
+    <!-- beak -->
+    <polygon points="172,85 186,82 172,90" fill="#f59e0b"/>
+    <!-- eye -->
+    <circle cx="162" cy="80" r="7" fill="#1e1b18"/>
+    <circle cx="164" cy="78" r="2" fill="white"/>
+    <!-- legs -->
+    <line x1="88" y1="172" x2="80" y2="192" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+    <line x1="108" y1="172" x2="116" y2="192" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
+    <!-- feet -->
+    <line x1="80" y1="192" x2="66" y2="196" stroke="#f59e0b" stroke-width="4"/>
+    <line x1="80" y1="192" x2="78" y2="198" stroke="#f59e0b" stroke-width="4"/>
+    <line x1="116" y1="192" x2="130" y2="196" stroke="#f59e0b" stroke-width="4"/>
+    <line x1="116" y1="192" x2="118" y2="198" stroke="#f59e0b" stroke-width="4"/>
+  </svg>`,
+
+  guerra: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- castle tower -->
+    <rect x="55" y="80" width="90" height="100" fill="#9ca3af"/>
+    <!-- battlements -->
+    <rect x="55" y="68" width="18" height="20" fill="#9ca3af"/>
+    <rect x="83" y="68" width="18" height="20" fill="#9ca3af"/>
+    <rect x="111" y="68" width="18" height="20" fill="#9ca3af"/>
+    <!-- gate -->
+    <rect x="82" y="138" width="36" height="42" rx="18" fill="#374151"/>
+    <!-- windows -->
+    <rect x="70" y="100" width="20" height="24" rx="10" fill="#374151"/>
+    <rect x="110" y="100" width="20" height="24" rx="10" fill="#374151"/>
+    <!-- flag -->
+    <line x1="100" y1="30" x2="100" y2="68" stroke="#374151" stroke-width="3"/>
+    <polygon points="100,30 130,42 100,54" fill="#ef4444"/>
+    <!-- ground -->
+    <rect x="20" y="178" width="160" height="14" rx="7" fill="#6b7280" opacity="0.4"/>
+  </svg>`,
+
+  guitarra: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- neck -->
+    <rect x="93" y="10" width="14" height="100" rx="7" fill="#d97706"/>
+    <!-- tuners -->
+    <circle cx="85" cy="18" r="6" fill="#92400e"/>
+    <circle cx="115" cy="18" r="6" fill="#92400e"/>
+    <circle cx="85" cy="32" r="6" fill="#92400e"/>
+    <circle cx="115" cy="32" r="6" fill="#92400e"/>
+    <circle cx="85" cy="46" r="6" fill="#92400e"/>
+    <circle cx="115" cy="46" r="6" fill="#92400e"/>
+    <!-- body -->
+    <ellipse cx="100" cy="148" rx="48" ry="42" fill="#f59e0b"/>
+    <ellipse cx="100" cy="118" rx="35" ry="28" fill="#f59e0b"/>
+    <!-- waist -->
+    <rect x="66" y="127" width="68" height="20" fill="#f59e0b"/>
+    <!-- sound hole -->
+    <circle cx="100" cy="143" r="16" fill="#92400e"/>
+    <circle cx="100" cy="143" r="12" fill="#78350f"/>
+    <!-- strings -->
+    <line x1="94" y1="108" x2="94" y2="170" stroke="#e5e7eb" stroke-width="1.5" opacity="0.7"/>
+    <line x1="97" y1="108" x2="97" y2="170" stroke="#e5e7eb" stroke-width="1.5" opacity="0.7"/>
+    <line x1="100" y1="108" x2="100" y2="170" stroke="#e5e7eb" stroke-width="1.5" opacity="0.7"/>
+    <line x1="103" y1="108" x2="103" y2="170" stroke="#e5e7eb" stroke-width="1.5" opacity="0.7"/>
+    <line x1="106" y1="108" x2="106" y2="170" stroke="#e5e7eb" stroke-width="1.5" opacity="0.7"/>
+    <line x1="109" y1="108" x2="109" y2="170" stroke="#e5e7eb" stroke-width="1.5" opacity="0.7"/>
+    <!-- bridge -->
+    <rect x="82" y="162" width="36" height="7" rx="3" fill="#92400e"/>
+  </svg>`,
+
+  guante: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- palm -->
+    <rect x="55" y="90" width="90" height="90" rx="18" fill="#3b82f6"/>
+    <!-- thumb -->
+    <ellipse cx="48" cy="110" rx="16" ry="26" fill="#3b82f6" transform="rotate(-15,48,110)"/>
+    <!-- fingers -->
+    <rect x="58" y="60" width="22" height="48" rx="11" fill="#3b82f6"/>
+    <rect x="84" y="52" width="22" height="52" rx="11" fill="#3b82f6"/>
+    <rect x="110" y="55" width="22" height="50" rx="11" fill="#3b82f6"/>
+    <rect x="129" y="65" width="18" height="42" rx="9" fill="#3b82f6"/>
+    <!-- cuff -->
+    <rect x="55" y="162" width="90" height="22" rx="10" fill="#1d4ed8"/>
+    <!-- knuckle lines -->
+    <line x1="70" y1="100" x2="70" y2="108" stroke="#1d4ed8" stroke-width="2"/>
+    <line x1="95" y1="100" x2="95" y2="108" stroke="#1d4ed8" stroke-width="2"/>
+    <line x1="121" y1="100" x2="121" y2="108" stroke="#1d4ed8" stroke-width="2"/>
+    <line x1="138" y1="102" x2="138" y2="110" stroke="#1d4ed8" stroke-width="2"/>
+  </svg>`,
+
+  gordo: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- body big round -->
+    <ellipse cx="100" cy="150" rx="68" ry="42" fill="#fdba74"/>
+    <ellipse cx="100" cy="115" rx="55" ry="50" fill="#fdba74"/>
+    <!-- head -->
+    <circle cx="100" cy="70" r="36" fill="#fcd34d"/>
+    <!-- ears -->
+    <circle cx="67" cy="72" r="12" fill="#fcd34d"/>
+    <circle cx="133" cy="72" r="12" fill="#fcd34d"/>
+    <!-- eyes -->
+    <ellipse cx="89" cy="65" rx="7" ry="8" fill="#1e1b18"/>
+    <ellipse cx="111" cy="65" rx="7" ry="8" fill="#1e1b18"/>
+    <circle cx="91" cy="63" r="2" fill="white"/>
+    <circle cx="113" cy="63" r="2" fill="white"/>
+    <!-- cheeks -->
+    <circle cx="78" cy="76" r="10" fill="#fca5a5" opacity="0.5"/>
+    <circle cx="122" cy="76" r="10" fill="#fca5a5" opacity="0.5"/>
+    <!-- smile -->
+    <path d="M86,82 Q100,94 114,82" stroke="#b45309" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- arms -->
+    <ellipse cx="43" cy="140" rx="18" ry="12" fill="#fdba74" transform="rotate(30,43,140)"/>
+    <ellipse cx="157" cy="140" rx="18" ry="12" fill="#fdba74" transform="rotate(-30,157,140)"/>
+    <!-- legs -->
+    <ellipse cx="80" cy="186" rx="18" ry="10" fill="#fdba74"/>
+    <ellipse cx="120" cy="186" rx="18" ry="10" fill="#fdba74"/>
+  </svg>`,
+
+  aguila: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- body -->
+    <ellipse cx="100" cy="120" rx="40" ry="35" fill="#92400e"/>
+    <!-- white belly -->
+    <ellipse cx="100" cy="128" rx="22" ry="20" fill="#fef3c7"/>
+    <!-- wings spread -->
+    <ellipse cx="45" cy="108" rx="42" ry="18" fill="#78350f" transform="rotate(-15,45,108)"/>
+    <ellipse cx="155" cy="108" rx="42" ry="18" fill="#78350f" transform="rotate(15,155,108)"/>
+    <!-- wing tips feathers -->
+    <ellipse cx="22" cy="118" rx="15" ry="7" fill="#92400e" transform="rotate(-25,22,118)"/>
+    <ellipse cx="178" cy="118" rx="15" ry="7" fill="#92400e" transform="rotate(25,178,118)"/>
+    <!-- head (white) -->
+    <circle cx="100" cy="80" r="28" fill="#fef3c7"/>
+    <!-- eye -->
+    <circle cx="112" cy="76" r="7" fill="#1e1b18"/>
+    <circle cx="114" cy="74" r="2" fill="white"/>
+    <!-- beak -->
+    <polygon points="118,82 138,88 118,96" fill="#f59e0b"/>
+    <!-- talons -->
+    <line x1="85" y1="150" x2="78" y2="170" stroke="#f59e0b" stroke-width="5"/>
+    <line x1="100" y1="152" x2="100" y2="174" stroke="#f59e0b" stroke-width="5"/>
+    <line x1="115" y1="150" x2="122" y2="170" stroke="#f59e0b" stroke-width="5"/>
+    <line x1="78" y1="170" x2="66" y2="178" stroke="#f59e0b" stroke-width="4"/>
+    <line x1="122" y1="170" x2="134" y2="178" stroke="#f59e0b" stroke-width="4"/>
+  </svg>`,
+
+  guiso: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- pot -->
+    <ellipse cx="100" cy="155" rx="65" ry="18" fill="#374151"/>
+    <rect x="35" y="110" width="130" height="50" rx="8" fill="#4b5563"/>
+    <ellipse cx="100" cy="110" rx="65" ry="18" fill="#6b7280"/>
+    <!-- lid -->
+    <ellipse cx="100" cy="100" rx="65" ry="16" fill="#9ca3af"/>
+    <ellipse cx="100" cy="95" rx="55" ry="12" fill="#d1d5db"/>
+    <!-- knob -->
+    <circle cx="100" cy="87" r="9" fill="#4b5563"/>
+    <!-- handles -->
+    <ellipse cx="32" cy="130" rx="12" ry="8" fill="#374151"/>
+    <ellipse cx="168" cy="130" rx="12" ry="8" fill="#374151"/>
+    <!-- steam -->
+    <path d="M75,88 Q70,70 78,55" stroke="#d1d5db" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M100,85 Q95,67 103,52" stroke="#d1d5db" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M125,88 Q120,70 128,55" stroke="#d1d5db" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+  </svg>`,
+
+  golpe: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- fist -->
+    <rect x="60" y="90" width="80" height="70" rx="16" fill="#fcd34d"/>
+    <!-- fingers -->
+    <rect x="65" y="68" width="18" height="32" rx="9" fill="#fcd34d"/>
+    <rect x="87" y="62" width="18" height="36" rx="9" fill="#fcd34d"/>
+    <rect x="109" y="64" width="18" height="34" rx="9" fill="#fcd34d"/>
+    <rect x="124" y="72" width="16" height="28" rx="8" fill="#fcd34d"/>
+    <!-- thumb -->
+    <ellipse cx="54" cy="112" rx="14" ry="22" fill="#fcd34d" transform="rotate(20,54,112)"/>
+    <!-- impact lines -->
+    <line x1="145" y1="90" x2="165" y2="76" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+    <line x1="148" y1="104" x2="172" y2="100" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+    <line x1="144" y1="118" x2="168" y2="120" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+    <!-- stars -->
+    <text x="148" y="72" font-size="18">⭐</text>
+    <text x="165" y="110" font-size="14">✨</text>
+  </svg>`,
+
+  guepardo: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- body -->
+    <ellipse cx="100" cy="140" rx="60" ry="32" fill="#fde68a"/>
+    <!-- head -->
+    <circle cx="152" cy="100" r="30" fill="#fde68a"/>
+    <!-- ears -->
+    <polygon points="140,76 132,54 154,72" fill="#fde68a"/>
+    <polygon points="164,76 172,54 150,72" fill="#fde68a"/>
+    <polygon points="141,75 135,60 153,72" fill="#f4a0a0"/>
+    <polygon points="163,75 169,60 151,72" fill="#f4a0a0"/>
+    <!-- spots body -->
+    <circle cx="75" cy="130" r="7" fill="#d97706" opacity="0.5"/>
+    <circle cx="100" cy="122" r="6" fill="#d97706" opacity="0.5"/>
+    <circle cx="120" cy="132" r="7" fill="#d97706" opacity="0.5"/>
+    <circle cx="90" cy="148" r="6" fill="#d97706" opacity="0.5"/>
+    <circle cx="115" cy="148" r="5" fill="#d97706" opacity="0.5"/>
+    <!-- spots head -->
+    <circle cx="145" cy="96" r="4" fill="#d97706" opacity="0.5"/>
+    <circle cx="162" cy="99" r="3" fill="#d97706" opacity="0.5"/>
+    <!-- eye -->
+    <ellipse cx="162" cy="94" rx="6" ry="7" fill="#1e1b18"/>
+    <circle cx="164" cy="92" r="2" fill="white"/>
+    <!-- tear marks -->
+    <line x1="158" y1="100" x2="154" y2="114" stroke="#1e1b18" stroke-width="2"/>
+    <line x1="164" y1="101" x2="162" y2="114" stroke="#1e1b18" stroke-width="2"/>
+    <!-- nose -->
+    <ellipse cx="174" cy="102" rx="5" ry="3.5" fill="#f47"/>
+    <!-- mouth -->
+    <path d="M169,106 Q174,112 179,106" stroke="#333" stroke-width="2" fill="none"/>
+    <!-- tail -->
+    <path d="M42,138 Q18,110 24,85" stroke="#fde68a" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <!-- legs -->
+    <ellipse cx="78" cy="168" rx="14" ry="10" fill="#fde68a"/>
+    <ellipse cx="110" cy="168" rx="14" ry="10" fill="#fde68a"/>
+    <ellipse cx="68" cy="178" rx="12" ry="8" fill="#fde68a"/>
+    <ellipse cx="122" cy="178" rx="12" ry="8" fill="#fde68a"/>
+  </svg>`,
+};
+
+/* ── WORD DATA ── */
+const WORDS = [
+  { word:'gato',     svg:'gato',     rule:'GA/GO/GU', color:'#22c55e',
+    options:['gato','gatto','jato','cato'] },
+  { word:'goma',     svg:'goma',     rule:'GA/GO/GU', color:'#22c55e',
+    options:['goma','joma','guma','coma'] },
+  { word:'gusano',   svg:'gusano',   rule:'GA/GO/GU', color:'#22c55e',
+    options:['jusano','gusano','guzano','cusano'] },
+  { word:'gorila',   svg:'gorila',   rule:'GA/GO/GU', color:'#22c55e',
+    options:['gorila','jorila','gorilla','gorela'] },
+  { word:'gallina',  svg:'gallina',  rule:'GA/GO/GU', color:'#22c55e',
+    options:['gallina','jalina','gayina','gaylina'] },
+  { word:'gordo',    svg:'gordo',    rule:'GA/GO/GU', color:'#22c55e',
+    options:['gordo','jordo','gurdo','gordu'] },
+  { word:'golpe',    svg:'golpe',    rule:'GA/GO/GU', color:'#22c55e',
+    options:['golpe','jolpe','guolpe','colpe'] },
+  { word:'guerra',   svg:'guerra',   rule:'GUE/GUI',  color:'#ec4899',
+    options:['guerra','guera','gerra','jerra'] },
+  { word:'guitarra', svg:'guitarra', rule:'GUE/GUI',  color:'#ec4899',
+    options:['guitarra','gitarra','guittarra','juitarra'] },
+  { word:'guante',   svg:'guante',   rule:'GUE/GUI',  color:'#ec4899',
+    options:['guante','guannte','gante','juante'] },
+  { word:'águila',   svg:'aguila',   rule:'GUE/GUI',  color:'#ec4899',
+    options:['agila','águila','ajila','ajuila'] },
+  { word:'guiso',    svg:'guiso',    rule:'GUE/GUI',  color:'#ec4899',
+    options:['guiso','giso','juiso','guizo'] },
+  { word:'guepardo', svg:'guepardo', rule:'GUE/GUI',  color:'#ec4899',
+    options:['jepardo','gepardo','guepardo','gueparto'] },
+];
+
+/* ── LEARN PAGE: render example cards ── */
+const EX1 = ['gato','goma','gusano','gorila','gallina','gordo'];
+const EX2 = ['guerra','guitarra','guante','águila','guiso','guepardo'];
+const WORD_MAP = {};
+WORDS.forEach(w => WORD_MAP[w.word] = w);
+WORD_MAP['águila'] = WORDS.find(w=>w.word==='águila');
+
+function renderLearnExamples(ids, gridId) {
+  const grid = document.getElementById(gridId);
+  ids.forEach((name, i) => {
+    const key = name === 'águila' ? 'águila' : name;
+    const entry = WORDS.find(w => w.word === key || w.word === name);
+    if (!entry) return;
+    const card = document.createElement('div');
+    card.className = 'ex-card';
+    card.style.animationDelay = (i * 0.07) + 's';
+    card.innerHTML = `
+      <svg viewBox="0 0 200 200" width="80" height="80">${SVGS[entry.svg]}</svg>
+      <div class="ex-word">${entry.word}</div>
+      <div class="ex-syl" style="color:${entry.color}">${entry.rule}</div>
+      <div class="speak-badge">🔊 toca para escuchar</div>
+    `;
+    card.onclick = () => speak(entry.word);
+    grid.appendChild(card);
+  });
+}
+renderLearnExamples(EX1, 'exGrid1');
+renderLearnExamples(EX2, 'exGrid2');
+
+/* ── SPEECH ── */
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'es-ES'; u.rate = 0.82;
+  speechSynthesis.speak(u);
+}
+
+/* ── GAME STATE ── */
+let queue = [];
+let current = null;
+let answered = false;
+let scoreOk = 0, scoreKo = 0, played = 0;
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function buildQueue() {
+  queue = shuffle(WORDS);
+}
+
+function nextQuestion() {
+  if (!queue.length) buildQueue();
+  current = queue.pop();
+  answered = false;
+
+  // badge
+  const badge = document.getElementById('qRuleBadge');
+  badge.textContent = current.rule;
+  badge.style.background = current.color;
+
+  // SVG
+  document.getElementById('svgWrapper').innerHTML =
+    `<svg viewBox="0 0 200 200" width="180" height="180">${SVGS[current.svg]}</svg>`;
+
+  // options
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  shuffle(current.options).forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => handleAnswer(opt, btn);
+    grid.appendChild(btn);
+  });
+
+  document.getElementById('feedbackArea').textContent = '';
+  document.getElementById('feedbackArea').className = 'feedback-area';
+  document.getElementById('nextBtn').className = 'next-btn';
+
+  // auto-speak
+  setTimeout(() => speak(current.word), 400);
+
+  // progress
+  const pct = Math.min(100, (played / 13) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function handleAnswer(opt, btn) {
+  if (answered) return;
+  answered = true;
+  played++;
+  document.getElementById('scoreTotal').textContent = played;
+
+  const correct = current.word;
+  const isOk = opt.toLowerCase() === correct.toLowerCase();
+
+  // highlight all btns
+  document.querySelectorAll('.opt-btn').forEach(b => {
+    b.disabled = true;
+    if (b.textContent.toLowerCase() === correct.toLowerCase()) b.classList.add('correct');
+  });
+  if (!isOk) btn.classList.add('wrong');
+
+  const fb = document.getElementById('feedbackArea');
+  if (isOk) {
+    scoreOk++;
+    fb.textContent = '🎉 ¡Muy bien!';
+    fb.className = 'feedback-area';
+    speak('¡Muy bien!');
+  } else {
+    scoreKo++;
+    fb.textContent = `❌ Era: ${correct}`;
+    fb.className = 'feedback-area ko';
+    speak('Inténtalo de nuevo');
+  }
+  document.getElementById('scoreOk').textContent = scoreOk;
+  document.getElementById('scoreKo').textContent = scoreKo;
+  document.getElementById('nextBtn').className = 'next-btn visible';
+}
+
+function listenWord() {
+  if (current) speak(current.word);
+}
+
+/* ── PAGE SWITCHING ── */
+function showPage(p) {
+  document.getElementById('pageLearn').classList.remove('active');
+  document.getElementById('pagePlay').classList.remove('active');
+  document.getElementById('tabLearn').className = 'tab-btn';
+  document.getElementById('tabPlay').className = 'tab-btn';
+
+  if (p === 'learn') {
+    document.getElementById('pageLearn').classList.add('active');
+    document.getElementById('tabLearn').className = 'tab-btn active-learn';
+  } else {
+    document.getElementById('pagePlay').classList.add('active');
+    document.getElementById('tabPlay').className = 'tab-btn active-play';
+    if (!current) { buildQueue(); nextQuestion(); }
+  }
+}
+
+// init queue
+buildQueue();
+</script>
+</body>
+</html>
